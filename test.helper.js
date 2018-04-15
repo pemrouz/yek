@@ -22,7 +22,10 @@ function startup(body = '') {
       const ripple = require('rijs')({ port: 0, dir: __dirname, watch: false })
       ripple.server.express.use((req, res) => res.send(`
         <script src="/ripple.js"></script>
-        <script>window.require = window.import = ripple.get</script>
+        <script>
+          window.require = window.import = ripple.get
+          function same(a, b){ if (a != b) throw new Error(a + ' is not ' + b) }
+        </script>
         <body>${body}</body> 
       `))
 

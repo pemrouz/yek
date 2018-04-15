@@ -1,9 +1,8 @@
 const { test } = require('tap')
-    , { client } = require('./client')
+    , { client } = require('./test.helper')
     
 test('basic', client(async () => {
-  const render = await require('../index.js')
-      , same = (a, b) => { if (a != b) throw new Error(`${a} is not ${b}`) }
+  const render = await require('./')
 
   render(document.body, {}, [
     ['ul', {}, [
@@ -16,8 +15,7 @@ test('basic', client(async () => {
 }))
 
 test('basic - props', client(async () => {
-  const render = await require('../index.js')
-      , same = (a, b) => { if (a != b) throw new Error(`${a} is not ${b}`) }
+  const render = await require('./')
 
   render(document.body, {}, [
     ['ul', {}, [
@@ -33,8 +31,7 @@ test('basic - props', client(async () => {
 }))
 
 test('custom elements - classes', client(async () => {
-  const yek = await require('../index.js')
-      , same = (a, b) => { if (a != b) throw new Error(`${a} is not ${b}`) }
+  const yek = await require('./')
 
   class Parent extends HTMLElement {
     render(node, state){
@@ -63,8 +60,7 @@ test('custom elements - classes', client(async () => {
 }))
 
 test('custom elements - tags', client(async () => {
-  const yek = await require('../index.js')
-      , same = (a, b) => { if (a != b) throw new Error(`${a} is not ${b}`) }
+  const yek = await require('./')
 
   class Parent extends HTMLElement {
     render(node, state){

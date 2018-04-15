@@ -1,7 +1,7 @@
 const { test } = require('tap')
-    , { client } = require('./test.helper')
+    , { spawn } = require('spawn-client')
     
-test('basic', client(async () => {
+test('basic', spawn(async () => {
   const render = await require('./')
 
   render(document.body, {}, [
@@ -14,7 +14,7 @@ test('basic', client(async () => {
   same(document.body.innerHTML.trim(), `<ul><li></li><li></li></ul>`)
 }))
 
-test('basic - props', client(async () => {
+test('basic - props', spawn(async () => {
   const render = await require('./')
 
   render(document.body, {}, [
@@ -30,7 +30,7 @@ test('basic - props', client(async () => {
   same(document.body.firstElementChild.lastElementChild.state.color, 'blue')
 }))
 
-test('custom elements - classes', client(async () => {
+test('custom elements - classes', spawn(async () => {
   const yek = await require('./')
 
   class Parent extends HTMLElement {
@@ -59,7 +59,7 @@ test('custom elements - classes', client(async () => {
   same(document.body.innerHTML.trim(), `<x-parent id="foo"><x-child><label>hey I'm bar</label></x-child></x-parent>`)
 }))
 
-test('custom elements - tags', client(async () => {
+test('custom elements - tags', spawn(async () => {
   const yek = await require('./')
 
   class Parent extends HTMLElement {

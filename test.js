@@ -31,7 +31,7 @@ test('basic - props', spawn(async () => {
 }))
 
 test('custom elements - classes', spawn(async () => {
-  const yek = await require('./')
+  const render = await require('./')
 
   class Parent extends HTMLElement {
     render(node, state){
@@ -41,7 +41,7 @@ test('custom elements - classes', spawn(async () => {
 
   class Child extends HTMLElement {
     render(node, state){
-      yek(node, {}, [
+      render(node, {}, [
         ['label', `hey I'm ${state.child}`]
       ])
     }
@@ -50,7 +50,7 @@ test('custom elements - classes', spawn(async () => {
   customElements.define('x-parent', Parent)
   customElements.define('x-child', Child)
 
-  yek(document.body, {}, [
+  render(document.body, {}, [
     [Parent, { parent: 'foo' }, [
       [Child, { child: 'bar' }]
     ]]
@@ -60,7 +60,7 @@ test('custom elements - classes', spawn(async () => {
 }))
 
 test('custom elements - tags', spawn(async () => {
-  const yek = await require('./')
+  const render = await require('./')
 
   class Parent extends HTMLElement {
     render(node, state){
@@ -70,7 +70,7 @@ test('custom elements - tags', spawn(async () => {
 
   class Child extends HTMLElement {
     render(node, state){
-      yek(node, {}, [
+      render(node, {}, [
         ['label', `hey I'm ${state.child}`]
       ])
     }
@@ -79,7 +79,7 @@ test('custom elements - tags', spawn(async () => {
   customElements.define('x-parent', Parent)
   customElements.define('x-child', Child)
 
-  yek(document.body, {}, [
+  render(document.body, {}, [
     ['x-parent', { parent: 'foo' }, [
       ['x-child', { child: 'bar' }]
     ]]

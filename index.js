@@ -1,4 +1,4 @@
-module.exports = yek
+module.exports = render
 const { assign } = Object 
     , special = {
         $attributes: (node, state, i) => {
@@ -8,7 +8,7 @@ const { assign } = Object
       }
     , copy = (node, state, i) => node[i] = node.state[i] = state[i]
 
-function yek(_node, state = {}, children){
+function render(_node, state = {}, children){
   const node = _node.n || new Node(_node)
 
   if (typeof state == 'object') {
@@ -27,9 +27,9 @@ function yek(_node, state = {}, children){
         continue
       }
       const [type, state = {}, grandchildren] = children[i]
-          , child = i >= node.children.length     ? node.add(yek(...children[i]))
-                  : type == node.children[i].type ? yek(node.children[i]._node, state, grandchildren)
-                                                  : node.replace(yek(...children[i]), i)
+          , child = i >= node.children.length     ? node.add(render(...children[i]))
+                  : type == node.children[i].type ? render(node.children[i]._node, state, grandchildren)
+                                                  : node.replace(render(...children[i]), i)
 
       if (child._node.render)
         child._node.render(child._node, child._node.state)
